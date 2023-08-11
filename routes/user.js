@@ -31,12 +31,16 @@ router.put("/:id/watch", async (req, res) => {
   const user = await User.findByPk(userId);
   const show = await Show.findByPk(showId);
 
-  if (!user || !show) {
-    return res.json(console.error("User or show not found"));
-  }
-
   await user.addShow(show);
-  res.json({ message: "Show associated with user" });
+
+  await User.update(
+    { watched: true },
+    {
+      where: { id: showId },
+    }
+  );
+
+  res.json(user);
 });
 
 module.exports = router;
