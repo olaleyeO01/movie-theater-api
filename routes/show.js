@@ -8,6 +8,8 @@ const {
 } = require("/Users/Olayele.Oduola/Bootcamp/Week6/movie-theater-api/models/index.js");
 
 router.get("/", async (req, res) => {
-  const user = await User.findAll();
+  const user = await Show.findAll();
   res.send(user);
 });
+
+module.exports = router;
